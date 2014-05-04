@@ -93,7 +93,7 @@ bool QFreefallSensorGestureRecognizer::isActive()
 }
 
 #define FREEFALL_THRESHOLD 1.0
-#define LANDED_THRESHOLD 20.0
+#define LANDED_THRESHOLD 25.0
 #define FREEFALL_MAX 4
 
 void QFreefallSensorGestureRecognizer::accelChanged(QAccelerometerReading *reading)
@@ -104,19 +104,20 @@ void QFreefallSensorGestureRecognizer::accelChanged(QAccelerometerReading *readi
     qreal sum = qSqrt(x * x + y * y + z * z);
 
     if (qAbs(sum) < FREEFALL_THRESHOLD) {
-        detecting = true;
         freefallList.append(sum);
     } else {
         if (detecting && qAbs(sum) > LANDED_THRESHOLD) {
             Q_EMIT landed();
             Q_EMIT detected("landed");
             freefallList.clear();
+            detecting = false;
         }
     }
 
-    if (freefallList.count() > FREEFALL_MAX) {
+    if (!detecting && freefallList.count() > FREEFALL_MAX) {
         Q_EMIT freefall();
         Q_EMIT detected("freefall");
+        detecting = true;
     }
 }
 
