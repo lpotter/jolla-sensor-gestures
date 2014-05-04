@@ -53,11 +53,11 @@
 
 QT_BEGIN_NAMESPACE
 
-struct twistAccelData {
-    qreal x;
-    qreal y;
-    qreal z;
-};
+//struct twistAccelData {
+//    qreal x;
+//    qreal y;
+//    qreal z;
+//};
 
 class QTwistSensorGestureRecognizer : public QSensorGestureRecognizer
 {
@@ -78,28 +78,29 @@ Q_SIGNALS:
     void twistRight();
 
 private slots:
-    void rotationChanged(QRotationReading *reading);
-    void orientationReadingChanged(QOrientationReading *reading);
+//    void rotationChanged(QRotationReading *reading);
+//    void orientationReadingChanged(QOrientationReading *reading);
     void gyroReadingChanged(QGyroscopeReading *reading);
-    void checkTwist();
-    void timeout();
+//    void checkTwist();
+//    void timeout();
 
 private:
 
-    QOrientationReading *orientationReading;
+//    QOrientationReading *orientationReading;
     bool active;
     bool detecting;
 //    QList <twistAccelData> dataList;
     bool checking;
     void reset();
-    bool checkOrientation();
-    int increaseCount;
-    int decreaseCount;
-    qreal lastAngle;
-    QList <QOrientationReading::Orientation> orientationList;
-    qreal detectedAngle;
-    QTimer *timer;
+//    bool checkOrientation();
+//    int increaseCount;
+//    int decreaseCount;
+//    qreal lastAngle;
+//    QList <QOrientationReading::Orientation> orientationList;
+//    qreal detectedAngle;
+//    QTimer *timer;
     QGyroscopeReading currentReading;
+    QList <qreal> gyroYs;
 };
 QT_END_NAMESPACE
 #endif // QWFLICKSENSORGESTURERECOGNIZER_H
