@@ -46,12 +46,13 @@
 
 QT_BEGIN_NAMESPACE
 
+#define RADIANS_TO_DEGREES 57.2957795
+#define TIMER_TIMEOUT 750
 QTwistSensorGestureRecognizer::QTwistSensorGestureRecognizer(QObject *parent)
     : QSensorGestureRecognizer(parent)
     , active(0)
-    , detecting(0)
-    , checking(0)
 {
+    qDebug();
 }
 
 QTwistSensorGestureRecognizer::~QTwistSensorGestureRecognizer()
@@ -64,7 +65,7 @@ void QTwistSensorGestureRecognizer::create()
 
 QString QTwistSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.twist");
+    return QString("Sailfish.twist");
 }
 
 bool QTwistSensorGestureRecognizer::start()
@@ -97,7 +98,6 @@ bool QTwistSensorGestureRecognizer::isActive()
 
 void QTwistSensorGestureRecognizer::gyroReadingChanged(QGyroscopeReading *reading)
 {
-    currentReading.setY(reading->y());
     if (qAbs(reading->y()) < 5)
         return;
 
@@ -106,7 +106,11 @@ void QTwistSensorGestureRecognizer::gyroReadingChanged(QGyroscopeReading *readin
         gyroYs.removeFirst();
         av = (reading->y() + gyroYs.at(0) + gyroYs.at(1) + gyroYs.at(2)) / 4;
         gyroYs.append(av);
+//        if (qAbs(av) > 100)
+//            qDebug() << "average" << av << reading->y() << lastY;
 
+//        if (av > 150 && reading->y() < -100)
+//                qDebug() << "<<<<<<<<<<<<<<<<<<< turn >>>>>>>>>>>>>>>>>>>>>";
     } else {
         gyroYs.append(reading->y());
     }
@@ -114,10 +118,11 @@ void QTwistSensorGestureRecognizer::gyroReadingChanged(QGyroscopeReading *readin
         Q_EMIT twistRight();
         Q_EMIT detected("twistRight");
     }
-    if (av < -150 && reading->y() > 75) {
+    if (av < -100 && reading->y() > 75 && lastY) {
         Q_EMIT twistLeft();
         Q_EMIT detected("twistLeft");
     }
+    lastY = reading->y();
 }
 
 QT_END_NAMESPACE

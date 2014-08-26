@@ -106,7 +106,7 @@ bool QShakeSensorGestureRecognizer::isActive()
 
 QString QShakeSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.shake");
+    return QString("Sailfish.shake");
 }
 
 #define NUMBER_SHAKES 3

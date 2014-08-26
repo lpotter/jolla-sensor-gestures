@@ -78,29 +78,16 @@ Q_SIGNALS:
     void twistRight();
 
 private slots:
-//    void rotationChanged(QRotationReading *reading);
-//    void orientationReadingChanged(QOrientationReading *reading);
     void gyroReadingChanged(QGyroscopeReading *reading);
-//    void checkTwist();
-//    void timeout();
-
 private:
 
-//    QOrientationReading *orientationReading;
     bool active;
-    bool detecting;
-//    QList <twistAccelData> dataList;
-    bool checking;
+//    bool detecting;
+//    bool checking;
     void reset();
-//    bool checkOrientation();
-//    int increaseCount;
-//    int decreaseCount;
-//    qreal lastAngle;
-//    QList <QOrientationReading::Orientation> orientationList;
-//    qreal detectedAngle;
-//    QTimer *timer;
-    QGyroscopeReading currentReading;
+//    QGyroscopeReading currentReading;
     QList <qreal> gyroYs;
+    qreal lastY;
 };
 QT_END_NAMESPACE
 #endif // QWFLICKSENSORGESTURERECOGNIZER_H

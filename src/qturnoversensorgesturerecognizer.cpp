@@ -65,6 +65,8 @@ void QTurnoverSensorGestureRecognizer::create()
 
 bool QTurnoverSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Proximity)) {
         if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Orientation)) {
             active = true;
@@ -105,7 +107,7 @@ bool QTurnoverSensorGestureRecognizer::isActive()
 
 QString QTurnoverSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.turnover");
+    return QString("Sailfish.turnover");
 }
 
 void QTurnoverSensorGestureRecognizer::proximityChanged(QProximityReading *reading)

@@ -60,11 +60,13 @@ void QDoubleTapSensorGestureRecognizer::create()
 
 QString QDoubleTapSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.doubletap");
+    return QString("Sailfish.doubletap");
 }
 
 bool QDoubleTapSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Tap)) {
         active = true;
         connect(QtSensorGestureSensorHandler::instance(),SIGNAL(dTabReadingChanged(QTapReading *)),

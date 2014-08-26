@@ -61,11 +61,13 @@ void QFreefallSensorGestureRecognizer::create()
 
 QString QFreefallSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.freefall");
+    return QString("Sailfish.freefall");
 }
 
 bool QFreefallSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Accel)) {
         active = true;
         connect(QtSensorGestureSensorHandler::instance(),SIGNAL(accelReadingChanged(QAccelerometerReading *)),

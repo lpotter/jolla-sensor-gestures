@@ -45,7 +45,13 @@
 
 QtSensorGestureSensorHandler::QtSensorGestureSensorHandler(QObject *parent) :
     QObject(parent),
-    accel(0), orientation(0), proximity(0), irProx(0),tapSensor(0), gyro(0)
+    accel(0),
+    orientation(0),
+    proximity(0),
+    irProx(0),
+    tapSensor(0),
+    gyro(0),
+    rotation(0)
 {
     qDebug();
 }
@@ -211,12 +217,13 @@ bool QtSensorGestureSensorHandler::startSensor(SensorGestureSensors sensor)
             connect(gyro,SIGNAL(readingChanged()),this,SLOT(gyroChanged()));
         }
         if (ok && !gyro->isActive())
+            gyro->setDataRate(50);
             if (!gyro->start())
                 qDebug() << "Gyro could not start";
         break;
     case Rotation:
         //Rotation
-        if (gyro == 0x0) {
+        if (rotation == 0x0) {
             qDebug() << "Rotation";
             rotation = new QRotationSensor(this);
             ok = rotation->connectToBackend();
@@ -226,9 +233,9 @@ bool QtSensorGestureSensorHandler::startSensor(SensorGestureSensors sensor)
             }
             connect(rotation,SIGNAL(readingChanged()),this,SLOT(rotationChanged()));
         }
-        if (ok && !gyro->isActive())
-            if (!gyro->start())
-                qDebug() << "Gyro could not start";
+        if (ok && !rotation->isActive())
+            if (!rotation->start())
+                qDebug() << "rotation could not start";
         break;
     };
     int val = usedSensorsMap.value(sensor);

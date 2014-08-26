@@ -66,11 +66,13 @@ void QHoverSensorGestureRecognizer::create()
 
 QString QHoverSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.hover");
+    return QString("Sailfish.hover");
 }
 
 bool QHoverSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::IrProximity)) {
         if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Orientation)) {
             active = true;

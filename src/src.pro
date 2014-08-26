@@ -1,5 +1,4 @@
-#TARGET = jolla_sensorgestures_plugin
-TARGET = qtsensorgestures_plugin
+TARGET = qtsailfishsensorgestures_plugin
 
 QT += core sensors
 DESTDIR = build
@@ -7,7 +6,7 @@ PLUGIN_TYPE = sensorgestures
 load(qt_plugin)
 
 # Input
-HEADERS += qtsensorgestureplugin.h \
+HEADERS += qtsailfishsensorgestureplugin.h \
     qcoversensorgesturerecognizer.h \
     qdoubletapsensorgesturerecognizer.h \
     qhoversensorgesturerecognizer.h \
@@ -20,7 +19,7 @@ HEADERS += qtsensorgestureplugin.h \
     qwhipsensorgesturerecognizer.h \
     qtsensorgesturesensorhandler.h
 
-SOURCES += qtsensorgestureplugin.cpp \
+SOURCES += qtsailfishsensorgestureplugin.cpp \
     qcoversensorgesturerecognizer.cpp \
     qdoubletapsensorgesturerecognizer.cpp \
     qhoversensorgesturerecognizer.cpp \

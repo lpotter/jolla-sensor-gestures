@@ -70,11 +70,13 @@ void QPickupSensorGestureRecognizer::create()
 
 QString QPickupSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.pickup");
+    return QString("Sailfish.pickup");
 }
 
 bool QPickupSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Rotation)) {
          if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Gyroscope)) {
             active = true;
@@ -218,6 +220,26 @@ void QPickupSensorGestureRecognizer::clear()
 {
     pitchList.clear();
     detecting = false;
+}
+
+void QPickupSensorGestureRecognizer::gyroReadingChanged(QGyroscopeReading *reading)
+{
+    if (qAbs(reading->x()) < 50)
+        return;
+    qDebug() << reading->x() /*<< reading->y() << reading->z()*/;
+
+    if (gyroList.count() > 6) {
+        gyroList.removeFirst();
+    }
+    gyroList.append(reading->x());
+
+    qreal average = 0;
+    Q_FOREACH (qreal i, gyroList) {
+        average += i;
+    }
+    average /= gyroList.count();
+
+    qDebug() << "    "<< average;
 }
 
 QT_END_NAMESPACE

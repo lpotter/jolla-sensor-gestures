@@ -75,11 +75,13 @@ void QWhipSensorGestureRecognizer::create()
 
 QString QWhipSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.whip");
+    return QString("Sailfish.whip");
 }
 
 bool QWhipSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Accel)) {
         if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Orientation)) {
             accelRange = QtSensorGestureSensorHandler::instance()->accelRange;

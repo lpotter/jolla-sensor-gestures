@@ -64,11 +64,12 @@ void QCoverSensorGestureRecognizer::create()
 
 QString QCoverSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.cover");
+    return QString("Sailfish.cover");
 }
 
 bool QCoverSensorGestureRecognizer::start()
 {
+    qDebug();
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Proximity)) {
         if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Orientation)) {
             active = true;

@@ -76,11 +76,13 @@ void QSlamSensorGestureRecognizer::create()
 
 QString QSlamSensorGestureRecognizer::id() const
 {
-    return QString("QtSensors.slam");
+    return QString("Sailfish.slam");
 }
 
 bool QSlamSensorGestureRecognizer::start()
 {
+    qDebug();
+
     if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Accel)) {
         if (QtSensorGestureSensorHandler::instance()->startSensor(QtSensorGestureSensorHandler::Orientation)) {
             active = true;

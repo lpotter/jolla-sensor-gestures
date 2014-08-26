@@ -67,6 +67,7 @@ Q_SIGNALS:
 
 private slots:
     void rotationChanged(QRotationReading *reading);
+    void gyroReadingChanged(QGyroscopeReading *);
 
     void timeout();
 private:
@@ -82,6 +83,7 @@ private:
 
     QList <qreal> pitchList;
     QList <qreal> rollList;
+    QList <qreal> gyroList;
 
     void clear();
 };

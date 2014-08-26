@@ -39,77 +39,32 @@
 **
 ****************************************************************************/
 
-#include <QtPlugin>
-#include <QStringList>
-#include <QObject>
+#ifndef QTSENSORGESTURESPLUGIN_H
+#define QTSENSORGESTURESPLUGIN_H
 
-#include "qtsensorgestureplugin.h"
+#include <QObject>
+#include <QStringList>
 
 #include <qsensorgestureplugininterface.h>
 
-#include "qcoversensorgesturerecognizer.h"
-#include "qtwistsensorgesturerecognizer.h"
-#include "qdoubletapsensorgesturerecognizer.h"
-#include "qhoversensorgesturerecognizer.h"
-#include "qpickupsensorgesturerecognizer.h"
-#include "qshakerecognizer.h"
-#include "qslamgesturerecognizer.h"
-#include "qturnoversensorgesturerecognizer.h"
-#include "qwhipsensorgesturerecognizer.h"
-#include "qfreefallsensorgesturerecognizer.h"
-
-
 QT_BEGIN_NAMESPACE
 
-
-QtSensorGesturePlugin::QtSensorGesturePlugin()
+class QtSailfishSensorGesturePlugin : public QObject, public QSensorGesturePluginInterface
 {
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.QSensorGesturePluginInterface")
+    Q_INTERFACES(QSensorGesturePluginInterface)
 
-QtSensorGesturePlugin::~QtSensorGesturePlugin()
-{
-}
+public:
+    explicit QtSailfishSensorGesturePlugin();
+    ~QtSailfishSensorGesturePlugin();
+    QList <QSensorGestureRecognizer *> createRecognizers();
 
-QStringList QtSensorGesturePlugin::supportedIds() const
-{
-    QStringList list;
-    list << "QtSensors.cover";
-    list << "QtSensors.doubletap";
-    list << "QtSensors.hover";
-    list << "QtSensors.freefall";
-    list << "QtSensors.pickup";
-    list << "QtSensors.shake";
-    list << "QtSensors.slam";
-    list << "QtSensors.turnover";
-    list << "QtSensors.twist";
-    list << "QtSensors.whip";
-    return list;
-}
+    QStringList gestureSignals() const;
+    QStringList supportedIds() const;
+    QString name() const { return "QtSailfishSensorGestures"; }
 
-QList <QSensorGestureRecognizer *> QtSensorGesturePlugin::createRecognizers()
-{
-    QList <QSensorGestureRecognizer *> recognizers;
-
-    recognizers.append(new QCoverSensorGestureRecognizer(this));
-
-    recognizers.append(new QDoubleTapSensorGestureRecognizer(this));
-
-    recognizers.append(new QHoverSensorGestureRecognizer(this));
-
-    recognizers.append(new QPickupSensorGestureRecognizer(this));
-
-    recognizers.append(new QShakeSensorGestureRecognizer(this));
-
-    recognizers.append(new QSlamSensorGestureRecognizer(this));
-
-    recognizers.append(new QTurnoverSensorGestureRecognizer(this));
-
-    recognizers.append(new QWhipSensorGestureRecognizer(this));
-
-    recognizers.append(new QTwistSensorGestureRecognizer(this));
-
-    recognizers.append(new QFreefallSensorGestureRecognizer(this));
-    return recognizers;
-}
+};
 
 QT_END_NAMESPACE
+#endif // QTSENSORGESTURESPLUGIN_H
