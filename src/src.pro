@@ -1,7 +1,7 @@
 TARGET = qtsailfishsensorgestures_plugin
-
 QT += core sensors
-DESTDIR = build
+DESTDIR = usr/lib/qt5/plugins/sensorgestures
+
 PLUGIN_TYPE = sensorgestures
 load(qt_plugin)
 
